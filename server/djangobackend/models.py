@@ -16,6 +16,11 @@ class Author(models.Model):
     )
     #slug = models.SlugField(blank=True, unique=True)
 
+    class META:
+        verbose_name = 'Author'
+        verbose_name_plural = 'Authors'
+
+
     def __str__(self): 
         return self.fullname
     
@@ -27,6 +32,15 @@ class Blog(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='date posted') 
     date_updated = models.DateTimeField(auto_now=True, verbose_name='date updated') 
     blog_author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
+
+
+    #META of blog
+    #we use reverse ordering so we can get the newest blogs
+    class META:
+        ordering = ['-id']
+        verbose_name = 'Blog'
+        verbose_name_plural = 'Blogs'
+
 
     def __str__(self): 
         return self.title
