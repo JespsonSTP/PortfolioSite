@@ -46,4 +46,18 @@ class Blog(models.Model):
         return self.title
     
 
-    
+class Comment(models.Model):
+    name = models.CharField(max_length=50)
+    Comment = models.TextField(max_length=5000)
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name='date posted') 
+    date_updated = models.DateTimeField(auto_now=True, verbose_name='date updated')
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, null=True)
+
+    class META:
+        verbose_name = 'Comment'
+        verbose_name_plural = 'Comments'
+
+
+    def __str__(self): 
+        return self.name
+

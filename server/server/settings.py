@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = '97!+8v%e-88klp70_kjwlsi0*jqp*^3hdl8l&b)w88hp%_pkqb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'django_filter',
-    'djangobackend'
+    'django_filters',
+    'djangobackend',
+    'graphene_django'
 ]
 
 MIDDLEWARE = [
@@ -79,9 +80,9 @@ WSGI_APPLICATION = 'server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD':'',
+        'NAME': 'jespsonBlog',
+        'USER': 'jepypostgres',
+        'PASSWORD':'Jespson-33181',
         'HOST':'localhost',
         'PORT':'5432',
     }
