@@ -17,6 +17,9 @@ class BlogNode(DjangoObjectType):
 class AuthorNode(DjangoObjectType):
     class Meta:
         model = Author
+        filter_fields = {
+            'fullname': ['exact', 'icontains', 'istartswith']
+        }
         interfaces = (relay.Node, )
 
 class CommentNode(DjangoObjectType):
@@ -41,6 +44,7 @@ class Query(ObjectType):
     blogs = DjangoFilterConnectionField(BlogNode, filterset_class=BlogFilter)
     author = relay.Node.field(AuthorNode)
     authors = DjangoFilterConnectionField(AuthorNode, filterset_class=AuthorFilter)
+    author = relay.Node.field(CommentNode)
 
 
 class Mutation(ObjectType):
