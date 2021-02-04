@@ -17,6 +17,8 @@ class Query(ObjectType):
     @login_required
     def resolve_current_user(root, info):
         user = info.context.user
+        if user.is_anonymous:
+            raise Exception('Not logged in User!')
         return user
 
 class Mutation(ObjectType):
