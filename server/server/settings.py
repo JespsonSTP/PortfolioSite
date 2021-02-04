@@ -40,7 +40,20 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'djangobackend',
-    'graphene_django'
+    'graphene_django',
+    'users'
+]
+
+GRAPHENE = {
+    'SCHEMA': 'library.schema.schema',
+    'MIDDLEWARE': [
+        'graphql_jwt.middleware.JSONWebTokenMiddleware',
+    ]
+}
+
+AUTHICATION_BACKENDS = [
+    'graphql_jwt.backendds.JSONWebTokenBackend',
+    'django.contrib,auth.backends.ModelBackend'
 ]
 
 MIDDLEWARE = [
