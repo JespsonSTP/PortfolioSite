@@ -1,6 +1,6 @@
-from djangobackend.models import Blog, Author, Comment
+from djangobackend.models import Blog, Author, Comment, Project
 from djangobackend.filters import BlogFilter, AuthorFilter
-from .serializers import BlogSerializer, AuthorSerializer, CommentSerializer
+from .serializers import BlogSerializer, AuthorSerializer, CommentSerializer, ProjectSerializer
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
@@ -23,5 +23,9 @@ class AuthorViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset=Comment.objects.all()
     serializer_class=AuthorSerializer
+
+class ProjectViewSet(viewsets.ModelViewSet):
+    queryset=Project.objects.all()
+    serializer_class=ProjectSerializer
 
 

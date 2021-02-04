@@ -1,5 +1,11 @@
 from rest_framework import serializers
-from djangobackend.models import Blog, Author, Comment
+from djangobackend.models import Blog, Author, Comment, Project
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Author
+        fields = ('id',)
 
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,14 +32,12 @@ class BlogSerializer(serializers.ModelSerializer):
             instance.save()
             return instance
 
-
-class AuthorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Author
-        fields = ('id',)
-
-
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
+        fields = ('id',)
+
+class ProjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Project
         fields = ('id',)
