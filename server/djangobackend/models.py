@@ -61,3 +61,18 @@ class Comment(models.Model):
     def __str__(self): 
         return self.name
 
+class Project(models.Model):
+    projectname = models.CharField(max_length=50)
+    videoDescriptionURL = models.CharField(max_length=500)
+    textDescription = models.TextField(max_length=5000)
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name='date posted') 
+    date_updated = models.DateTimeField(auto_now=True, verbose_name='date updated')
+
+    class META:
+        verbose_name = 'Project'
+        verbose_name_plural = 'Projects'
+
+
+    def __str__(self): 
+        return self.projectname
+
