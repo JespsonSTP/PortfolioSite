@@ -4,15 +4,9 @@ from graphene_django.filter import DjangoFilterConnectionField
 from .api.serializers import BlogSerializer, AuthorSerializer, CommentSerializer, ProjectSerializer
 from graphene_django.rest_framework.mutation import serializerMutation
 from .filters import BlogFilter, AuthorFilter
-from .models import Blog, Author, Comment, Project
+from .models import Author, Blog, Comment, Project
 
 #urning python objects into node for graphql
-
-class BlogNode(DjangoObjectType):
-    class Meta:
-        model = Blog
-        interfaces = (relay.Node, )
-
 
 class AuthorNode(DjangoObjectType):
     class Meta:
@@ -20,6 +14,11 @@ class AuthorNode(DjangoObjectType):
         filter_fields = {
             'fullname': ['exact', 'icontains', 'istartswith']
         }
+        interfaces = (relay.Node, )
+
+class BlogNode(DjangoObjectType):
+    class Meta:
+        model = Blog
         interfaces = (relay.Node, )
 
 class CommentNode(DjangoObjectType):
@@ -32,13 +31,14 @@ class ProjectNode(DjangoObjectType):
         model = Project
         interfaces = (relay.Node, )
 
-class BlogMutation(serializerMutation):
-    class Meta:
-        serializer_class = BlogSerializer
-
+    
 class AuthorMutation(serializerMutation):
     class Meta:
         serializer_class = AuthorSerializer
+
+class BlogMutation(serializerMutation):
+    class Meta:
+        serializer_class = BlogSerializer
 
 class CommentMutation(serializerMutation):
     class Meta:
@@ -49,10 +49,10 @@ class ProjectMutation(serializerMutation):
         serializer_class = ProjectSerializer
 
 class Query(ObjectType):
-    blog = relay.Node.field(BlogNode)
-    blogs = DjangoFilterConnectionField(BlogNode, filterset_class=BlogFilter)
     author = relay.Node.field(AuthorNode)
     authors = DjangoFilterConnectionField(AuthorNode, filterset_class=AuthorFilter)
+    blog = relay.Node.field(BlogNode)
+    blogs = DjangoFilterConnectionField(BlogNode, filterset_class=BlogFilter)
     comment = relay.Node.field(CommentNode)
     comments = DjangoFilterConnectionField(CommentNode)
     project= relay.Node.field(ProjectNode)
@@ -60,7 +60,7 @@ class Query(ObjectType):
 
 
 class Mutation(ObjectType):
-    blog_mutation = BlogMutation.field()
     author_mutation = AuthorMutation.field()
+    blog_mutation = BlogMutation.field()
     comment_mutation = CommentMutation.field()
     project_mutation = projectMutation.field()

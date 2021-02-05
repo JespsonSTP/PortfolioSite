@@ -1,18 +1,19 @@
 from rest_framework import serializers
-from djangobackend.models import Blog, Author, Comment, Project
+from djangobackend.models import Author, Blog, Comment, Project
 
 
-class AuthorSerializer(serializers.ModelSerializer):
+class CommentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Author
-        fields = ('id',)
+        model = Comment
+        fields = '__all__'
 
 class BlogSerializer(serializers.ModelSerializer):
+    comments = CommentSerializer(many=True, read_only=True)
     class Meta:
         model = Blog
-        fields = ('id',)
+        fields = '__all__'
         extra_kwargs = {
-            'id'; {'read_only':False, 'required':False}
+            'id': {'read_only':False, 'required':False}
         }
 
         #edititing the create method because in graphql it wont't
@@ -32,12 +33,13 @@ class BlogSerializer(serializers.ModelSerializer):
             instance.save()
             return instance
 
-class CommentSerializer(serializers.ModelSerializer):
+class AuthorSerializer(serializers.ModelSerializer):
+    blogs = BlogSerializer(many=True, read_only=True)
     class Meta:
-        model = Comment
-        fields = ('id',)
+        model = Author
+        fields = '__all__'
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ('id',)
+        fields = '__all__'
