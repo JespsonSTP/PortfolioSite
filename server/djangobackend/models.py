@@ -28,6 +28,10 @@ class Author(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=50)
     blogpic = models.ImageField(null=True)
+    blogpicTwo = models.ImageField(null=True)
+    blogpicThree = models.ImageField(null=True)
+    blogpicFour = models.ImageField(null=True)
+    blogpicFive = models.ImageField(null=True)
     body = models.TextField(max_length=5000)
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='date posted') 
     date_updated = models.DateTimeField(auto_now=True, verbose_name='date updated') 
