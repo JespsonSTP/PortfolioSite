@@ -1,9 +1,10 @@
+import graphene
 from graphene import relay, ObjectType
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
+from graphene_django.rest_framework.mutation import SerializerMutation
 from .api.serializers import BlogSerializer, AuthorSerializer, CommentSerializer, ProjectSerializer
-from graphene_django.rest_framework.mutation import serializerMutation
-from .filters import BlogFilter, AuthorFilter
+from .filters import BlogFilter, CommentFilter, ProjectFilter
 from .models import Author, Blog, Comment, Project
 
 #urning python objects into node for graphql
@@ -32,35 +33,35 @@ class ProjectNode(DjangoObjectType):
         interfaces = (relay.Node, )
 
     
-class AuthorMutation(serializerMutation):
+class AuthorMutation(SerializerMutation):
     class Meta:
         serializer_class = AuthorSerializer
 
-class BlogMutation(serializerMutation):
+class BlogMutation(SerializerMutation):
     class Meta:
         serializer_class = BlogSerializer
 
-class CommentMutation(serializerMutation):
+class CommentMutation(SerializerMutation):
     class Meta:
         serializer_class = CommentSerializer
 
-class ProjectMutation(serializerMutation):
+class ProjectMutation(SerializerMutation):
     class Meta:
         serializer_class = ProjectSerializer
 
 class Query(ObjectType):
-    author = relay.Node.field(AuthorNode)
-    authors = DjangoFilterConnectionField(AuthorNode, filterset_class=AuthorFilter)
-    blog = relay.Node.field(BlogNode)
+    author = relay.Node.Field(AuthorNode)
+    authors = DjangoFilterConnectionField(AuthorNode)
+    blog = relay.Node.Field(BlogNode)
     blogs = DjangoFilterConnectionField(BlogNode, filterset_class=BlogFilter)
-    comment = relay.Node.field(CommentNode)
-    comments = DjangoFilterConnectionField(CommentNode)
-    project= relay.Node.field(ProjectNode)
-    projects = DjangoFilterConnectionField(ProjectNode)
+    comment = relay.Node.Field(CommentNode)
+    comments = DjangoFilterConnectionField(CommentNode,  filterset_class= CommentFilter)
+    project= relay.Node.Field(ProjectNode)
+    projects = DjangoFilterConnectionField(ProjectNode, filterset_class= ProjectFilter)
 
 
 class Mutation(ObjectType):
-    author_mutation = AuthorMutation.field()
-    blog_mutation = BlogMutation.field()
-    comment_mutation = CommentMutation.field()
-    project_mutation = projectMutation.field()
+    author_mutation = AuthorMutation.Field()
+    blog_mutation = BlogMutation.Field()
+    comment_mutation = CommentMutation.Field()
+    project_mutation = ProjectMutation.Field()

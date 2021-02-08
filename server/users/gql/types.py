@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 
 User =  get_user_model()
 
-class UserType(DjangoObjectTyep):
+class UserType(DjangoObjectType):
     class Meta:
         model = User
         exclude = ('password', )
