@@ -1,3 +1,4 @@
+import graphene
 from graphene import Schema, ObjectType
 import djangobackend.schema
 import users.gql.schema
