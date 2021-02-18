@@ -1,12 +1,12 @@
 import React from 'react'
-import Jepy from '../showcase/Jepy.jpg'
+import './Showcase.css'
 
 const Showcase = ()=> {
 
     return (
-        <div>
-            <p>Hi, I'm Jespson Saint-Pierre, I Build Scalable Softwares</p>
-            <img src={Jepy} />
+        <div className="Showcase-container">
+            <p className='showcase-text'>Hi, I'm Jespson Saint-Pierre, I Build Scalable Softwares</p>
+            <img src='/images/jepy.jpg'/>
         </div>
     )
 }
