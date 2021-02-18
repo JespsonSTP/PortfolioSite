@@ -9,7 +9,12 @@ class Project extends Component {
     render() {
         const {projectname, projectPicture, projectDescription } = this.state
         return (
-            <div>
+            <div className='card-wrapper'>
+            <div className="card">
+            <img/>
+            <h1>projectname</h1>
+            <p>projectDescription</p>
+            </div>
             </div>
         )
     }

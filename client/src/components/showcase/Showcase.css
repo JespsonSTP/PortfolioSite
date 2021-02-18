@@ -1,0 +1,11 @@
+.Showcase-container {
+    display: flex;
+    border-radius: 4px;
+    border-color: white;
+    background-color: black;
+    flex-direction: column;
+}
+
+.showcase-text {
+    color: white;
+}

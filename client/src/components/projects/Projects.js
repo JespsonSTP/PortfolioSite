@@ -2,6 +2,7 @@ import React, {useEffect, useContext}from 'react'
 import { AppContext } from '../../context/AppContext';
 import {gql, useQuery} from '@apollo/client'
 import Project from './Project'
+import './Project.css'
 
 const GET_PROJECTS = gql`
                       query{
@@ -28,9 +29,10 @@ const Projects = () => {
        // eslint-disable-line react-hooks/exhaustive-deps
     }, [data])
     return (
-            <div>
-                <Project/>
-            </div>
+      <div>
+      <img className='project-background'src='/images/coffe.jpg' alt='the picture of a coffe'/>
+      <Project/>
+      </div>
     )
 }
 
